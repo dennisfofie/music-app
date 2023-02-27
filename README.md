@@ -1,0 +1,1 @@
+This project is about making music application and it will be edited later
