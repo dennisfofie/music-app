@@ -48,7 +48,7 @@ class Song(db.Model):
     song_description = db.Column(db.String(1000))
     product_song = db.Column(db.Integer, db.ForeignKey('product.product_id'))
 
-    def __str__(self):
+    def __repr__(self):
         return f"{self.song_title}"
 
 class Product(db.Model):
@@ -59,6 +59,7 @@ class Product(db.Model):
     product_title = db.Column(db.String(100), nullable=False)
     in_stock = db.Column(db.Boolean, default=True)
     ordered = db.Column(db.Integer, db.ForeignKey('order.order_id'))
+    artist = db.Column(db.Integer, db.ForeignKey('artiste.artist_id'))
     product_song = db.relationship('Song')
 
 
