@@ -24,7 +24,10 @@ class Artiste(db.Model):
     artist_id = db.Column(db.Integer, primary_key=True)
     artist_name = db.Column(db.String(150))
     artist_email = db.Column(db.String(100), unique=True)
-    artist_songs = db.relationship("Product")
+    artist_product = db.relationship("Product")
+    artist_songs = db.relationship('Song')
+
+    
 
     def __str__(self):
         return "{}".format(self.artist_name)
@@ -45,6 +48,7 @@ class Song(db.Model):
     song_id = db.Column(db.Integer, primary_key=True)
     artist = db.Column(db.Integer, db.ForeignKey('artiste.artist_id'))
     song_title = db.Column(db.String(100))
+    audio = db.Column(db.Text)
     song_description = db.Column(db.String(1000))
     product_song = db.Column(db.Integer, db.ForeignKey('product.product_id'))
 
@@ -58,6 +62,7 @@ class Product(db.Model):
     release_date = db.Column(db.Integer, nullable=False, default=datetime.utcnow())
     product_title = db.Column(db.String(100), nullable=False)
     in_stock = db.Column(db.Boolean, default=True)
+    artist_id = db.Column(db.Integer, db.ForeignKey('artiste.artist_id'))
     ordered = db.Column(db.Integer, db.ForeignKey('order.order_id'))
     product_song = db.relationship('Song')
 
